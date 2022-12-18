@@ -5,6 +5,7 @@ import com.jureumuing.nolhac.controller.CandidateController;
 import com.jureumuing.nolhac.dto.CandidateRequestDto;
 import com.jureumuing.nolhac.dto.CandidateResponseDto;
 import com.jureumuing.nolhac.entity.CandidateEntity;
+import com.jureumuing.nolhac.repository.AdmitRepository;
 import com.jureumuing.nolhac.repository.CandidateRepository;
 import com.jureumuing.nolhac.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class CandidateService {
     
     final CandidateRepository candidateRepository;
     final UserRepository userRepository;
+    final AdmitRepository admitRepository;
 
     public List<CandidateResponseDto> findAll(){
         List<CandidateEntity> candidateEntities =candidateRepository.selectAll();
@@ -67,5 +69,11 @@ public class CandidateService {
                     .build();
 
         return candidateResponseDto;
+    }
+
+    public int deleteCandidate(int id){
+        candidateRepository.delete(id);
+        admitRepository.deleteCandidate(id);
+        return 1;
     }
 }
