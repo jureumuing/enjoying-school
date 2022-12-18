@@ -11,6 +11,9 @@ import com.jureumuing.nolhac.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ChallengePostingService {
@@ -68,5 +71,27 @@ public class ChallengePostingService {
                 .provingVideo(challengePostingEntity.getProvingVideo())
                 .build();
         return challengePostingRes;
+    }
+
+    //특정 챌린지에 대한 챌린지포스팅목록 조회
+    public List<ChallengePostingRes> findChallengePostingList(int challengeId){
+        List<ChallengePostingEntity> challengePostingEntityList = challengePostingRepository.selectByChallengeId(challengeId);
+        List<ChallengePostingRes> challengePostingResList = new ArrayList<>();
+        for(ChallengePostingEntity challengePostingEntity: challengePostingEntityList){
+            UserEntity writer = userRepository.select(challengePostingEntity.getUserId());
+            ChallengeEntity challengeEntity = challengeRepository.select(challengePostingEntity.getChallengeId());
+            ChallengePostingRes challengePostingRes = ChallengePostingRes.builder()
+                    .challengePostingId(challengePostingEntity.getChallengePostingId())
+                    .userId(writer.getUserId())
+                    .nickname(writer.getNickname())
+                    .challengeId(challengeEntity.getChallengeId())
+                    .challengeTitle(challengeEntity.getTitle())
+                    .datetime(challengePostingEntity.getDatetime())
+                    .provingImage(challengePostingEntity.getProvingImage())
+                    .provingVideo(challengePostingEntity.getProvingVideo())
+                    .build();
+            challengePostingResList.add(challengePostingRes);
+        }
+        return challengePostingResList;
     }
 }
