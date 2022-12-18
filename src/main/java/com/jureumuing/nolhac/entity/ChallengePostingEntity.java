@@ -14,5 +14,5 @@ public class ChallengePostingEntity {
     private String provingImage;
     private String provingVideo;
     private int likeCount;
-    private int user_id;
+    private int userId;
 }
