@@ -22,9 +22,9 @@ public class ChallengeController {
 
     //챌린지종류 전체 목록 조회 api
     @GetMapping("/api/challenges")
-    public ResponseEntity<?> loadChallengeList(@RequestHeader(value = "Authorization")String headerToken){
-        String token=headerToken;
-        if(token.substring(0,7).equals("Bearer ")) {
+    public ResponseEntity<?> loadChallengeList(@RequestHeader(value = "Authorization") String headerToken) {
+        String token = headerToken;
+        if (token.substring(0, 7).equals("Bearer ")) {
             token = headerToken.substring("Bearer ".length());
         }
         int userId = tokenService.findUserIdByJwt(token);
@@ -33,7 +33,25 @@ public class ChallengeController {
         try {
             List<ChallengeEntity> challengeEntityList = challengeService.findChallengeList();
             return ResponseEntity.status(HttpStatus.OK).body(challengeEntityList);
-        }catch (Exception e){
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("오류발생"));
+        }
+    }
+
+    @GetMapping("/api/challenges/{challengeId}")
+    public ResponseEntity<?> findChallengeDetail(@RequestHeader(value = "Authorization") String headerToken, @PathVariable int challengeId) {
+        String token = headerToken;
+        if (token.substring(0, 7).equals("Bearer ")) {
+            token = headerToken.substring("Bearer ".length());
+        }
+        int userId = tokenService.findUserIdByJwt(token);
+        if (token == null || !tokenService.validateToken(token))
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse("토큰 인증 실패. 조회 권한이 없습니다."));
+
+        try {
+            
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("오류발생"));
         }
