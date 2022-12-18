@@ -7,5 +7,10 @@ import java.util.List;
 
 @Mapper
 public interface ChallengePostingRepository {
-    List<ChallengePostingEntity> selectByChallengeId(int challengePostingId);
+
+    int insert(ChallengePostingEntity challengePostingEntity);
+    ChallengePostingEntity select(int challengePostingId);
+    List<ChallengePostingEntity> selectByChallengeId(int challengeId);
+    List<ChallengePostingEntity> selectByUserId(int userId);
+    int update(ChallengePostingEntity challengePostingEntity);
 }
