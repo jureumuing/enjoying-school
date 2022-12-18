@@ -8,6 +8,7 @@ import java.util.List;
 @Mapper
 public interface ChallengePostingRepository {
 
+    int insert(ChallengePostingEntity challengePostingEntity);
     ChallengePostingEntity select(int challengePostingId);
     List<ChallengePostingEntity> selectByChallengeId(int challengeId);
     int update(ChallengePostingEntity challengePostingEntity);

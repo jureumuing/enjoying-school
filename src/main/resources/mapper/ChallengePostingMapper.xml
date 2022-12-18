@@ -3,6 +3,15 @@
 
 <mapper namespace="com.jureumuing.nolhac.repository.ChallengePostingRepository">
 
+    <insert id="insert"
+            parameterType="ChallengePostingEntity"
+            useGeneratedKeys="true"
+            keyProperty="challengePostingId"
+            keyColumn="challenge_posting_id">
+        INSERT INTO challenge_posting (user_id, challenge_id, datetime, proving_image, proving_video, like_count)
+        VALUES (#{userId}, #{challengeId}, now(), #{provingImage}, #{provingVideo}, #{likeCount});
+    </insert>
+
     <select id="select"
             resultType="ChallengePostingEntity">
         SELECT challenge_posting_id, challenge_id, datetime, proving_image, proving_video, like_count, user_id
@@ -29,7 +38,7 @@
                  like_count = #{likeCount},
               proving_image = #{provingImage},
               proving_video = #{provingVideo}
-         WHERE diary_id=#{diaryId};
+         WHERE challenge_posting_id=#{challengePostingId};
     </update>
 
 </mapper>

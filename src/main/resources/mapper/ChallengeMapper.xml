@@ -18,10 +18,27 @@
          WHERE challenge_id = #{challengeId};
     </select>
 
+    <select id="selectByChallengeTitle"
+            resultType="ChallengeEntity">
+        SELECT challenge_id, title, when_content, where_content, what_content, how_content, count, user_id
+        FROM challenge
+        WHERE title = #{title};
+    </select>
+
     <select id="selectAll"
             resultType="ChallengeEntity">
         SELECT challenge_id, title, when_content, where_content, what_content, how_content, user_id
           FROM challenge
     </select>
+
+    <update id="updateCount"
+            parameterType="ChallengeEntity"
+            useGeneratedKeys="true"
+            keyProperty="challengeId"
+            keyColumn="challenge_id">
+        UPDATE challenge
+           SET count = #{count}
+         WHERE challenge_id = #{challengeId}
+    </update>
 
 </mapper>
