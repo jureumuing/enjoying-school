@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class CandidateEntity {
-    private int challengeId;
+    private int candidateId;
     private String title;
     private String when;
     private String where;
@@ -14,4 +14,5 @@ public class CandidateEntity {
     private String how;
     private int admitCount;
     private int userId;
+    private String exampleImage;
 }

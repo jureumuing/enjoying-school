@@ -7,34 +7,34 @@
             useGeneratedKeys="true"
             keyProperty="userId"
             keyColumn="user_id">
-        INSERT INTO user (nickname, mail, challenge_count, rank_id)
+        INSERT INTO users (nickname, mail, challenge_count, rank_id)
         VALUES (#{nickname}, #{mail}, #{challengeCount}, #{rankId});
     </insert>
 
     <select id="select"
             resultType="UserEntity">
-        SELECT user_id, nickname, mail, challenge_count, rank_id
-          FROM user
-         WHERE user_id = #{userId};
+        SELECT userss_id, nickname, mail, challenge_count, rank_id
+          FROM userss
+         WHERE userss_id = #{userId};
     </select>
 
     <delete id="delete"
             parameterType="int">
         DELETE
-        FROM user
-        WHERE user_id = #{userId};
+        FROM userss
+        WHERE userss_id = #{userId};
     </delete>
 
     <select id="selectByMail" resultType="UserEntity">
-        SELECT user_id, nickname, mail, challenge_count, rank_id
-          FROM user
+        SELECT userss_id, nickname, mail, challenge_count, rank_id
+          FROM userss
          WHERE mail = #{mail};
     </select>
 
     <select id="selectByNickname"
             resultType="UserEntity">
-        SELECT user_id, nickname, mail, challenge_count, rank_id
-          FROM user
+        SELECT userss_id, nickname, mail, challenge_count, rank_id
+          FROM userss
          WHERE nickname = #{nickname};
     </select>
 </mapper>

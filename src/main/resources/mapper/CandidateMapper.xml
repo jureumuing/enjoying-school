@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jureumuing.nolhac.repository.CandidateRepository">
+    <insert id="insert"
+            parameterType="CandidateEntity"
+            useGeneratedKeys="true"
+            keyProperty="candidateId"
+            keyColumn="candidate_id">
+        INSERT INTO candidate (title, when_content, where_content, what_content, how_content, admit_count, user_id)
+        VALUES (#{title}, #{when}, #{where},#{what},#{how}, #{admitCount},#{userId});
+    </insert>
+
+    <select id="selectAll"
+            resultType="CandidateEntity">
+        SELECT *
+          FROM candidate;
+    </select>
+
+    <delete id="delete"
+            parameterType="int">
+        DELETE
+        FROM candidate
+        WHERE candidate_id = #{candidateId};
+    </delete>
+
+    <update id="update"
+            parameterType="CandidateEntity"
+            useGeneratedKeys="true"
+            keyProperty="candidateId"
+            keyColumn="candidate_id">
+        UPDATE candidate
+        SET admit_count= #{admitCount}
+        WHERE candidate_id = #{candidateId};
+    </update>
+</mapper>

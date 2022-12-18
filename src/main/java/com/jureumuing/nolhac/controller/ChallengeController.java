@@ -2,9 +2,7 @@ package com.jureumuing.nolhac.controller;
 
 import com.jureumuing.nolhac.dto.ChallengeDetail;
 import com.jureumuing.nolhac.dto.ErrorResponse;
-import com.jureumuing.nolhac.entity.CandidateEntity;
 import com.jureumuing.nolhac.entity.ChallengeEntity;
-import com.jureumuing.nolhac.repository.ChallengeRepository;
 import com.jureumuing.nolhac.service.ChallengeService;
 import com.jureumuing.nolhac.service.TokenService;
 import lombok.RequiredArgsConstructor;
@@ -74,6 +72,16 @@ public class ChallengeController {
         try {
             List<ChallengeDetail> challengeDetailAll = challengeService.findChallengeDetailAll();
             return ResponseEntity.status(HttpStatus.OK).body(challengeDetailAll);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("오류발생"));
+        }
+    }
+    @GetMapping("/api/challengess")
+    public ResponseEntity<?> loadChallengeListAll() {
+        try {
+            List<ChallengeEntity> challengeEntityList = challengeService.findChallengeList();
+            return ResponseEntity.status(HttpStatus.OK).body(challengeEntityList);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("오류발생"));
