@@ -59,4 +59,14 @@ public class ChallengeController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("오류발생"));
         }
     }
+    @GetMapping("/api/challengess")
+    public ResponseEntity<?> loadChallengeListAll() {
+        try {
+            List<ChallengeEntity> challengeEntityList = challengeService.findChallengeList();
+            return ResponseEntity.status(HttpStatus.OK).body(challengeEntityList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("오류발생"));
+        }
+    }
 }

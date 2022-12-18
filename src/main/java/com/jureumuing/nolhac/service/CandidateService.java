@@ -21,6 +21,7 @@ public class CandidateService {
     final CandidateRepository candidateRepository;
     final UserRepository userRepository;
     final AdmitRepository admitRepository;
+    final FileService fileService;
 
     public List<CandidateResponseDto> findAll(){
         List<CandidateEntity> candidateEntities =candidateRepository.selectAll();
@@ -35,6 +36,7 @@ public class CandidateService {
                     .when(e.getWhen())
                     .where(e.getWhere())
                     .writer(userRepository.select(e.getUserId()).getNickname())
+                    .exampleImage(e.getExampleImage())
                     .build();
             candidateList.add(candidateResponseDto);
         }
@@ -42,8 +44,7 @@ public class CandidateService {
     }
 
     public int createCandidate(CandidateRequestDto e, int writer){
-
-
+        String path=fileService.uploadFileExemple(e.getExampleImage());
         CandidateEntity newCandidateEntity= CandidateEntity.builder()
                 .how(e.getHow())
                 .title(e.getTitle())
@@ -51,6 +52,7 @@ public class CandidateService {
                 .when(e.getWhen())
                 .where(e.getWhere())
                 .userId(writer)
+                .exampleImage(path)
                 .build();
         candidateRepository.insert(newCandidateEntity);
         return 1;
@@ -65,6 +67,7 @@ public class CandidateService {
                     .what(e.getWhat())
                     .when(e.getWhen())
                     .where(e.getWhere())
+                    .exampleImage(e.getExampleImage())
                     .writer(userRepository.select(e.getUserId()).getNickname())
                     .build();
 

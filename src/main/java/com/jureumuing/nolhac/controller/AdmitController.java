@@ -23,8 +23,6 @@ public class AdmitController {
     final TokenService tokenService;
 
 
-
-
     @PostMapping
     public ResponseEntity<?> createAdmit(@RequestHeader(value = "Authorization") String headerToken, AdmitRequestDto admitRequestDto){
         String token=headerToken;

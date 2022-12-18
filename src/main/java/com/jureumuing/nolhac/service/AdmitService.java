@@ -53,6 +53,7 @@ public class AdmitService {
                 .when(ce.getWhen())
                 .where(ce.getWhere())
                 .userId(ce.getUserId())
+                .exampleImage(ce.getExampleImage())
                 .build();
         challengeRepository.insert(ch);
         candidateService.deleteCandidate(ce.getCandidateId());

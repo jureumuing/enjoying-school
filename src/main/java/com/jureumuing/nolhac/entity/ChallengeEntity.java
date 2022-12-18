@@ -12,6 +12,7 @@ public class ChallengeEntity {
     private String what;
     private String how;
     private String where;
+    private String exampleImage;
     private int count;
     private int userId;
 }

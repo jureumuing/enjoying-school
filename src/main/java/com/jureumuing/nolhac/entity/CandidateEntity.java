@@ -14,4 +14,5 @@ public class CandidateEntity {
     private String how;
     private int admitCount;
     private int userId;
+    private String exampleImage;
 }

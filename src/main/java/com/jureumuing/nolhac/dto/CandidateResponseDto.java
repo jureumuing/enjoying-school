@@ -14,4 +14,5 @@ public class CandidateResponseDto {
     String how;
     String what;
     String writer;
+    String exampleImage;
 }
