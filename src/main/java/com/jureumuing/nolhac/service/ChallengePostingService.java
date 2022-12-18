@@ -21,17 +21,21 @@ public class ChallengePostingService {
     private final ChallengeRepository challengeRepository;
     private final ChallengePostingRepository challengePostingRepository;
     private final UserRepository userRepository;
+    private final FileService fileService;
 
     //참여챌린지추가(참여챌린지추가+해당챌린지의 참여수+1)
     public ChallengePostingRes writeChallengePosting(int userId, ChallengePostingReq challengePostingReq){
+
+        String imagePath=fileService.uploadFileProving(challengePostingReq.getProvingImage(),"image");
+        String videoPath=fileService.uploadFileProving(challengePostingReq.getProvingVideo(),"video");
         UserEntity userEntity = userRepository.select(userId);
         ChallengeEntity challengeEntity = challengeRepository.selectByChallengeTitle(challengePostingReq.getChallengeTitle());
         ChallengePostingEntity challengePostingEntity = ChallengePostingEntity.builder()
                 .userId(userId)
                 .challengeId(challengeEntity.getChallengeId())
                 .likeCount(0)
-                .provingImage(challengePostingReq.getProvingImage())
-                .provingVideo(challengePostingReq.getProvingVideo())
+                .provingImage(imagePath)
+                .provingVideo(videoPath)
                 .build();
 
         challengePostingRepository.insert(challengePostingEntity);
@@ -48,8 +52,8 @@ public class ChallengePostingService {
                 .challengeId(challengeEntity.getChallengeId())
                 .challengeTitle(challengeEntity.getTitle())
                 .datetime(newChallengePostingEntity.getDatetime())
-                .provingImage(challengePostingReq.getProvingImage())
-                .provingVideo(challengePostingReq.getProvingVideo())
+                .provingImage(imagePath)
+                .provingVideo(videoPath)
                 .build();
 
         return challengePostingRes;
