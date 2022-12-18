@@ -14,6 +14,7 @@ import java.util.List;
 public interface CandidateRepository {
 
     int insert(CandidateEntity candidateEntity);
+    CandidateEntity selectById(int candidateId);
     int delete(int candidateId);
     ArrayList<CandidateEntity> selectAll();
     int update(int candidateId, int admitCount);

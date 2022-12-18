@@ -5,11 +5,13 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ChallengeCandidateDto {
+public class CandidateResponseDto {
+    int candidateId;
+    int admitCount;
     String title;
     String when;
     String where;
     String how;
     String what;
-    int user_id;
+    String writer;
 }
