@@ -19,7 +19,7 @@ public class FileService {
 
     private final AmazonS3 amazonS3;
 
-    public String uploadFileExemple(MultipartFile file, String dataType){
+    public String uploadFileExemple(MultipartFile file){
         //type은 해당 파일이
 
         String filePath=null;
@@ -31,7 +31,7 @@ public class FileService {
                 //UUID: 범용 고유 식별자
                 String uuid = UUID.randomUUID().toString();
                 //lastIndexOf("__")앞까지가 uuid임. 그 이후는 서버로 전송된 상태의 파일 이름
-                String savefileName = "challenge_example"+ "/" +dataType+"/"+ uuid + "__" + fileName;
+                String savefileName = "challenge_example"+ "/" +"image"+"/"+ uuid + "__" + fileName;
 
                 try {
                     ObjectMetadata objMeta = new ObjectMetadata();
@@ -63,7 +63,7 @@ public class FileService {
             //UUID: 범용 고유 식별자
             String uuid = UUID.randomUUID().toString();
             //lastIndexOf("__")앞까지가 uuid임. 그 이후는 서버로 전송된 상태의 파일 이름
-            String savefileName = "challenge_proving"+ "/" +dataType+"/"+ uuid + "__" + fileName;
+            String savefileName = "challenge_proving"+ "/" +"image"+"/"+ uuid + "__" + fileName;
 
             try {
                 ObjectMetadata objMeta = new ObjectMetadata();
