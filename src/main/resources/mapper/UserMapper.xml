@@ -6,7 +6,7 @@
             parameterType="UserEntity"
             useGeneratedKeys="true"
             keyProperty="userId"
-            keyColumn="user_id">
+            keyColumn="userss_id">
         INSERT INTO userss (nickname, mail, challenge_count, rank_id)
         VALUES (#{nickname}, #{mail}, #{challengeCount}, #{rankId});
     </insert>
