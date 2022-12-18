@@ -7,20 +7,20 @@
             useGeneratedKeys="true"
             keyProperty="challengeId"
             keyColumn="challenge_id">
-        INSERT INTO challenge (title, when, where, what, how, count, user_id)
+        INSERT INTO challenge (title, when_content, where_content, what_content, how_content, count, user_id)
         VALUES (#{title}, #{when}, #{where}, #{what}, #{how}, #{count}, #{user_id});
     </insert>
 
     <select id="select"
             resultType="ChallengeEntity">
-        SELECT challenge_id, title, when, where, what, how, count, user_id
+        SELECT challenge_id, title, when_content, where_content, what_content, how_content, count, user_id
           FROM challenge
          WHERE challenge_id = #{challengeId};
     </select>
 
     <select id="selectAll"
             resultType="ChallengeEntity">
-        SELECT challenge_id, title, when, where, what, how, count, user_id
+        SELECT challenge_id, title, when_content, where_content, what_content, how_content, user_id
           FROM challenge
     </select>
 
