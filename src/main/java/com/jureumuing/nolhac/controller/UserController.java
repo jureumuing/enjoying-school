@@ -30,7 +30,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/api/users/{nickname}/challeng-posting")
+    @GetMapping("/api/users/{nickname}/challenge-posting")
     public ResponseEntity<?> loadMyChallengePostingList(@RequestHeader(value = "Authorization") String headerToken, @PathVariable String nickname) {
         String token = headerToken;
         if (token.substring(0, 7).equals("Bearer ")) {

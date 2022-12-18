@@ -120,4 +120,25 @@ public class ChallengePostingService {
         }
         return challengePostingResList;
     }
+
+    public List<ChallengePostingRes> findChallengePostingAll(){
+        List<ChallengePostingEntity> challengePostingEntityList = challengePostingRepository.selectAll();
+        List<ChallengePostingRes> challengePostingResList = new ArrayList<>();
+        for(ChallengePostingEntity challengePostingEntity: challengePostingEntityList){
+            UserEntity writer = userRepository.select(challengePostingEntity.getUserId());
+            ChallengeEntity challengeEntity = challengeRepository.select(challengePostingEntity.getChallengeId());
+            ChallengePostingRes challengePostingRes = ChallengePostingRes.builder()
+                    .challengePostingId(challengePostingEntity.getChallengePostingId())
+                    .userId(writer.getUserId())
+                    .nickname(writer.getNickname())
+                    .challengeId(challengeEntity.getChallengeId())
+                    .challengeTitle(challengeEntity.getTitle())
+                    .datetime(challengePostingEntity.getDatetime())
+                    .provingImage(challengePostingEntity.getProvingImage())
+                    .provingVideo(challengePostingEntity.getProvingVideo())
+                    .build();
+            challengePostingResList.add(challengePostingRes);
+        }
+        return challengePostingResList;
+    }
 }

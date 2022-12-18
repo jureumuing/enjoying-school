@@ -19,6 +19,12 @@
          WHERE challenge_posting_id = #{challengePostingId};
     </select>
 
+    <select id="selectAll"
+            resultType="ChallengePostingEntity">
+        SELECT challenge_posting_id, challenge_id, datetime, proving_image, proving_video, like_count, user_id
+        FROM challenge_posting
+    </select>
+
     <select id="selectByChallengeId"
             resultType="ChallengePostingEntity">
         SELECT challenge_posting_id, challenge_id, datetime, proving_image, proving_video, like_count, user_id
