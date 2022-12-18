@@ -1,3 +1,26 @@
+#mybatis
+mybatis:
+  type-aliases-package: com.jureumuing.nolhac.entity #entity ??
+  mapper-locations: mapper/**/*.xml
 
+spring:
+  jwt:
+    secretKey:
+
+  spring:
+    application:
+      name: nolhac
+      profiles:
+        active: dev
+
+    datasource:
+      url:
+      driver-class-name:
+      username:
+      password:
+
+server:
+  port: 8019
+  forward-headers-strategy: framework
 jwt:
   secretKey: jureumuingNolHakKeyJwtSecret12411128094456375876587
