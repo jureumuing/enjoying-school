@@ -59,4 +59,24 @@ public class ChallengeController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("오류발생"));
         }
     }
+
+    //챌린지 종류 전체+상세조회(챌린지정보+참여리스트)
+    @GetMapping("/api/challenges/all")
+    public ResponseEntity<?> findChallengeDetailAll(@RequestHeader(value = "Authorization") String headerToken) {
+        String token = headerToken;
+        if (token.substring(0, 7).equals("Bearer ")) {
+            token = headerToken.substring("Bearer ".length());
+        }
+        int userId = tokenService.findUserIdByJwt(token);
+        if (token == null || !tokenService.validateToken(token))
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse("토큰 인증 실패. 조회 권한이 없습니다."));
+
+        try {
+            List<ChallengeDetail> challengeDetailAll = challengeService.findChallengeDetailAll();
+            return ResponseEntity.status(HttpStatus.OK).body(challengeDetailAll);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("오류발생"));
+        }
+    }
 }

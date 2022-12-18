@@ -11,6 +11,7 @@ import com.jureumuing.nolhac.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,5 +53,33 @@ public class ChallengeService {
                 .build();
 
         return challengeDetail;
+    }
+
+
+    //챌린지 전체상세조회 (방법+참여리스트)
+    public List<ChallengeDetail> findChallengeDetailAll(){
+        List<ChallengeEntity> challengeEntityList = challengeRepository.selectAll();
+        List<ChallengeDetail> challengeDetails = new ArrayList<>();
+        for (ChallengeEntity challengeEntity: challengeEntityList) {
+            UserEntity writer = userRepository.select(challengeEntity.getUserId());
+            ChallengeRes challengeRes = ChallengeRes.builder()
+                    .challengeId(challengeEntity.getChallengeId())
+                    .nickname(writer.getNickname())
+                    .title(challengeEntity.getTitle())
+                    .when(challengeEntity.getWhen())
+                    .where(challengeEntity.getWhere())
+                    .what(challengeEntity.getWhat())
+                    .how(challengeEntity.getHow())
+                    .count(challengeEntity.getCount())
+                    .build();
+            List<ChallengePostingRes> challengePostingResList = challengePostingService.findChallengePostingListByChallengeId(challengeEntity.getChallengeId());
+            ChallengeDetail challengeDetail = ChallengeDetail.builder()
+                    .challengeInfo(challengeRes)
+                    .challengePostingList(challengePostingResList)
+                    .build();
+            challengeDetails.add(challengeDetail);
+        }
+
+        return challengeDetails;
     }
 }
