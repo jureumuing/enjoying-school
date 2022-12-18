@@ -12,11 +12,11 @@ public class UserService {
     private final UserRepository userRepository;
     private final TokenService tokenService;
 
-    public LoginRes login(String email){
-        if(userRepository.selectByEmail(email)==null){
+    public LoginRes login(String mail){
+        if(userRepository.selectByMail(mail)==null){
             UserEntity newUserEntity = UserEntity.builder()
-                            .email(email)
-                                    .nickname(email)
+                            .mail(mail)
+                                    .nickname(mail)
                                             .challengeCount(0)
                                                     .rankId(1)
                                                             .build();
@@ -24,7 +24,7 @@ public class UserService {
             userRepository.insert(newUserEntity);
         }
 
-        UserEntity user = userRepository.selectByEmail(email);
+        UserEntity user = userRepository.selectByMail(mail);
 
         String accessToken = tokenService.createToken(user.getUserId());
         String refreshToken = tokenService.createRefreshToken();

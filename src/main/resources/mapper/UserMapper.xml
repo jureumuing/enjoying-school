@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jureumuing.nolhac.repository.UserRepository">
+    <insert id="insert"
+            parameterType="UserEntity"
+            useGeneratedKeys="true"
+            keyProperty="userId"
+            keyColumn="user_id">
+        INSERT INTO user (nickname, mail, challenge_count, rank_id)
+        VALUES (#{nickname}, #{mail}, #{challengeCount}, #{rankId});
+    </insert>
+
+    <select id="select"
+            resultType="UserEntity">
+        SELECT user_id, nickname, mail, challenge_count, rank_id
+          FROM user
+         WHERE user_id = #{userId};
+    </select>
+
+    <delete id="delete"
+            parameterType="int">
+        DELETE
+        FROM user
+        WHERE user_id = #{userId};
+    </delete>
+
+    <select id="selectByMail" resultType="UserEntity">
+        SELECT user_id, nickname, mail, challenge_count, rank_id
+          FROM user
+         WHERE mail = #{mail};
+    </select>
+
+    <select id="selectByNickname"
+            resultType="UserEntity">
+        SELECT user_id, nickname, mail, challenge_count, rank_id
+          FROM user
+         WHERE nickname = #{nickname};
+    </select>
+</mapper>

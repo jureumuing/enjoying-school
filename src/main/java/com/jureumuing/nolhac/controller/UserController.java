@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,9 +17,9 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/api/users")
-    public ResponseEntity<?> login(String email) {
+    public ResponseEntity<?> login(@RequestBody String mail) {
         try {
-            LoginRes loginRes = userService.login(email);
+            LoginRes loginRes = userService.login(mail);
             return ResponseEntity.status(HttpStatus.CREATED).body(loginRes);
         }catch (Exception e){
             e.printStackTrace();

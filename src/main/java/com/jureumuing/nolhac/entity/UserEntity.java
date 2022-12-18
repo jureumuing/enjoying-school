@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class UserEntity {
     private int userId;
-    private String email;
+    private String mail;
     private String nickname;
     private int challengeCount;
     private int rankId;
