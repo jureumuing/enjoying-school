@@ -13,21 +13,21 @@
 
     <select id="select"
             resultType="ChallengeEntity">
-        SELECT challenge_id, title, when_content, where_content, what_content, how_content, count, user_id
+        SELECT challenge_id, title, when_content, what_content, how_content, where_content, example, posting_count, user_id
           FROM challenge
          WHERE challenge_id = #{challengeId};
     </select>
 
     <select id="selectByChallengeTitle"
             resultType="ChallengeEntity">
-        SELECT challenge_id, title, when_content, where_content, what_content, how_content, count, user_id
+        SELECT challenge_id, title, when_content, what_content, how_content, where_content, example, posting_count, user_id
         FROM challenge
         WHERE title = #{title};
     </select>
 
     <select id="selectAll"
             resultType="ChallengeEntity">
-        SELECT challenge_id, title, when_content, where_content, what_content, how_content, user_id
+        SELECT challenge_id, title, when_content, what_content, how_content, where_content, example, posting_count, user_id
           FROM challenge
     </select>
 
@@ -37,7 +37,7 @@
             keyProperty="challengeId"
             keyColumn="challenge_id">
         UPDATE challenge
-           SET count = #{count}
+           SET posting_count = #{count}
          WHERE challenge_id = #{challengeId}
     </update>
 

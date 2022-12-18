@@ -2,7 +2,9 @@ package com.jureumuing.nolhac.entity;
 
 import lombok.Builder;
 import lombok.Data;
+import org.joda.time.DateTime;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
