@@ -3,6 +3,7 @@ package com.jureumuing.nolhac.controller;
 import com.jureumuing.nolhac.dto.ChallengePostingRes;
 import com.jureumuing.nolhac.dto.ErrorResponse;
 import com.jureumuing.nolhac.dto.LoginRes;
+import com.jureumuing.nolhac.dto.MailReq;
 import com.jureumuing.nolhac.service.TokenService;
 import com.jureumuing.nolhac.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +21,9 @@ public class UserController {
     private final TokenService tokenService;
 
     @PostMapping("/api/users")
-    public ResponseEntity<?> login(@RequestBody String mail) {
+    public ResponseEntity<?> login(@RequestBody MailReq mailReq) {
         try {
-            LoginRes loginRes = userService.login(mail);
+            LoginRes loginRes = userService.login(mailReq.getMail());
             return ResponseEntity.status(HttpStatus.CREATED).body(loginRes);
         } catch (Exception e) {
             e.printStackTrace();
