@@ -74,7 +74,7 @@ public class ChallengePostingService {
     }
 
     //특정 챌린지에 대한 챌린지포스팅목록 조회
-    public List<ChallengePostingRes> findChallengePostingList(int challengeId){
+    public List<ChallengePostingRes> findChallengePostingListByChallengeId(int challengeId){
         List<ChallengePostingEntity> challengePostingEntityList = challengePostingRepository.selectByChallengeId(challengeId);
         List<ChallengePostingRes> challengePostingResList = new ArrayList<>();
         for(ChallengePostingEntity challengePostingEntity: challengePostingEntityList){

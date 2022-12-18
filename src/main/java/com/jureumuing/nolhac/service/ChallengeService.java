@@ -1,10 +1,14 @@
 package com.jureumuing.nolhac.service;
 
 import com.jureumuing.nolhac.dto.ChallengeDetail;
+import com.jureumuing.nolhac.dto.ChallengePostingRes;
+import com.jureumuing.nolhac.dto.ChallengeRes;
 import com.jureumuing.nolhac.entity.ChallengeEntity;
 import com.jureumuing.nolhac.entity.ChallengePostingEntity;
+import com.jureumuing.nolhac.entity.UserEntity;
 import com.jureumuing.nolhac.repository.ChallengePostingRepository;
 import com.jureumuing.nolhac.repository.ChallengeRepository;
+import com.jureumuing.nolhac.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +20,8 @@ public class ChallengeService {
 
     private final ChallengeRepository challengeRepository;
     private final ChallengePostingRepository challengePostingRepository;
+    private final ChallengePostingService challengePostingService;
+    private final UserRepository userRepository;
 
     //챌린지전체목록조회
     public List<ChallengeEntity> findChallengeList(){
@@ -26,11 +32,24 @@ public class ChallengeService {
     //챌린지 상세조회 (방법+참여리스트)
     public ChallengeDetail findChallengeDetail(int challengeId){
         ChallengeEntity challengeEntity = challengeRepository.select(challengeId);
-        List<ChallengePostingEntity> challengePostingEntityList = challengePostingRepository.selectByChallengeId(challengeId);
+        UserEntity writer = userRepository.select(challengeEntity.getUserId());
+        ChallengeRes challengeRes = ChallengeRes.builder()
+                .challengeId(challengeId)
+                .nickname(writer.getNickname())
+                .title(challengeEntity.getTitle())
+                .when(challengeEntity.getWhen())
+                .where(challengeEntity.getWhere())
+                .what(challengeEntity.getWhat())
+                .how(challengeEntity.getHow())
+                .count(challengeEntity.getCount())
+                .build();
+
+        List<ChallengePostingRes> challengePostingResList = challengePostingService.findChallengePostingListByChallengeId(challengeId);
+
 
         ChallengeDetail challengeDetail = ChallengeDetail.builder()
-                .challengeInfo(challengeEntity)
-                .challengePostingList(challengePostingEntityList)
+                .challengeInfo(challengeRes)
+                .challengePostingList(challengePostingResList)
                 .build();
 
         return challengeDetail;
