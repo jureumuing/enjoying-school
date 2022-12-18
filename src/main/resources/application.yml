@@ -16,6 +16,11 @@ spring:
     username: admin5
     password: jongsul5
 
+  #springfox 사용 가능
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
 server:
   port: 8019
   forward-headers-strategy: framework
