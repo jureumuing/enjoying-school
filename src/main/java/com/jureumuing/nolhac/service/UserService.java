@@ -1,16 +1,20 @@
 package com.jureumuing.nolhac.service;
 
+import com.jureumuing.nolhac.dto.ChallengePostingRes;
 import com.jureumuing.nolhac.dto.LoginRes;
 import com.jureumuing.nolhac.entity.UserEntity;
 import com.jureumuing.nolhac.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
     private final TokenService tokenService;
+    private final ChallengePostingService challengePostingService;
 
     public LoginRes login(String mail){
         if(userRepository.selectByMail(mail)==null){
@@ -36,5 +40,10 @@ public class UserService {
                 .build();
 
         return loginRes;
+    }
+
+    public List<ChallengePostingRes> findMyChallengePostingList(int userId){
+        List<ChallengePostingRes> challengePostingResList = challengePostingService.findChallengePostingListByUserId(userId);
+        return challengePostingResList;
     }
 }

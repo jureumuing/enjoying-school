@@ -94,4 +94,26 @@ public class ChallengePostingService {
         }
         return challengePostingResList;
     }
+
+    //유저에 대한 챌린지포스팅목록 조회
+    public List<ChallengePostingRes> findChallengePostingListByUserId(int userId){
+        List<ChallengePostingEntity> challengePostingEntityList = challengePostingRepository.selectByUserId(userId);
+        List<ChallengePostingRes> challengePostingResList = new ArrayList<>();
+        for(ChallengePostingEntity challengePostingEntity: challengePostingEntityList){
+            UserEntity writer = userRepository.select(challengePostingEntity.getUserId());
+            ChallengeEntity challengeEntity = challengeRepository.select(challengePostingEntity.getChallengeId());
+            ChallengePostingRes challengePostingRes = ChallengePostingRes.builder()
+                    .challengePostingId(challengePostingEntity.getChallengePostingId())
+                    .userId(writer.getUserId())
+                    .nickname(writer.getNickname())
+                    .challengeId(challengeEntity.getChallengeId())
+                    .challengeTitle(challengeEntity.getTitle())
+                    .datetime(challengePostingEntity.getDatetime())
+                    .provingImage(challengePostingEntity.getProvingImage())
+                    .provingVideo(challengePostingEntity.getProvingVideo())
+                    .build();
+            challengePostingResList.add(challengePostingRes);
+        }
+        return challengePostingResList;
+    }
 }
