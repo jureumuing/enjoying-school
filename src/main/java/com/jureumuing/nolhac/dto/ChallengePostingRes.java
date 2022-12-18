@@ -13,10 +13,6 @@ public class ChallengePostingRes {
     private String nickname;
     private int challengeId;
     private String challengeTitle;
-    private String when;
-    private String where;
-    private String what;
-    private String how;
     private LocalDateTime datetime;
     private String provingImage;
     private String provingVideo;

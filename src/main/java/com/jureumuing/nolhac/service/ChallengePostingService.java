@@ -45,14 +45,28 @@ public class ChallengePostingService {
                 .challengeId(challengeEntity.getChallengeId())
                 .challengeTitle(challengeEntity.getTitle())
                 .datetime(newChallengePostingEntity.getDatetime())
-                .what(challengePostingReq.getWhat())
-                .when(challengePostingReq.getWhen())
-                .where(challengePostingReq.getWhere())
-                .how(challengePostingReq.getHow())
                 .provingImage(challengePostingReq.getProvingImage())
                 .provingVideo(challengePostingReq.getProvingVideo())
                 .build();
 
+        return challengePostingRes;
+    }
+
+    //특정챌린지포스팅조회
+    public ChallengePostingRes findChallengePostingDetail(int challengePostingId){
+        ChallengePostingEntity challengePostingEntity = challengePostingRepository.select(challengePostingId);
+        ChallengeEntity challengeEntity = challengeRepository.select(challengePostingEntity.getChallengeId());
+        UserEntity writer = userRepository.select(challengePostingEntity.getUserId());
+        ChallengePostingRes challengePostingRes = ChallengePostingRes.builder()
+                .challengePostingId(challengePostingEntity.getChallengePostingId())
+                .userId(writer.getUserId())
+                .nickname(writer.getNickname())
+                .challengeId(challengeEntity.getChallengeId())
+                .challengeTitle(challengeEntity.getTitle())
+                .datetime(challengePostingEntity.getDatetime())
+                .provingImage(challengePostingEntity.getProvingImage())
+                .provingVideo(challengePostingEntity.getProvingVideo())
+                .build();
         return challengePostingRes;
     }
 }
