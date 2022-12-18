@@ -37,7 +37,8 @@ public class AdmitService {
         return 1;
 
     }
-    public int deleteAdmit(int candidateId, int userId){
+    public int deleteAdmit(AdmitRequestDto admitRequestDto, int userId){
+        int candidateId= admitRequestDto.getCandidateId();
         AdmitEntity e=admitRepository.select(candidateId,userId);
         admitRepository.delete(e.getAdmitId());
         CandidateEntity c=candidateRepository.selectById(candidateId);
