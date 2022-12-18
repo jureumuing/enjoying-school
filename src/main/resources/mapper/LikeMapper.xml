@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jureumuing.nolhac.repository.LikeRepository">
+    <insert id="insert"
+            parameterType="LikeEntity"
+            useGeneratedKeys="true"
+            keyProperty="likeId"
+            keyColumn="like_id">
+        INSERT INTO like (user_id, challenge_posting_id)
+        VALUES (#{userId}, #{challengePostingId});
+    </insert>
+</mapper>

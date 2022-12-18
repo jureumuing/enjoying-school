@@ -3,6 +3,13 @@
 
 <mapper namespace="com.jureumuing.nolhac.repository.ChallengePostingRepository">
 
+    <select id="select"
+            resultType="ChallengePostingEntity">
+        SELECT challenge_posting_id, challenge_id, datetime, proving_image, proving_video, like_count, user_id
+          FROM challenge_posting
+         WHERE challenge_posting_id = #{challengePostingId};
+    </select>
+
     <select id="selectByChallengeId"
             resultType="ChallengePostingEntity">
         SELECT challenge_posting_id, challenge_id, datetime, proving_image, proving_video, like_count, user_id
@@ -10,4 +17,20 @@
          WHERE challenge_id = #{challengeId};
     </select>
 
+    <update id="update"
+            parameterType="ChallengePostingEntity"
+            useGeneratedKeys="true"
+            keyProperty="challengePostingId"
+            keyColumn="challenge_posting_id">
+        UPDATE challenge_posting
+           SET challenge_id = #{challengeId},
+                   datetime = #{datetime},
+                    user_id = #{userId},
+                 like_count = #{likeCount},
+              proving_image = #{provingImage},
+              proving_video = #{provingVideo}
+         WHERE diary_id=#{diaryId};
+    </update>
+
 </mapper>
+

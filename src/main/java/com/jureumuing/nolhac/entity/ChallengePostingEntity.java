@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class ChallengePostingEntity {
     private int challengePostingId;
     private int challengeId;
-    private LocalDateTime dateTime;
+    private LocalDateTime datetime;
     private String provingImage;
     private String provingVideo;
     private int likeCount;
