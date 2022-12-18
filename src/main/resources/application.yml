@@ -9,11 +9,12 @@ spring:
     profiles:
       active: dev
 
+  #postgreSQL
   datasource:
-    url:
-    driver-class-name:
-    username:
-    password:
+    url: jdbc:postgresql://welcome5-db.c7zdxujz2wc8.ap-northeast-2.rds.amazonaws.com:5432/nollhac #??DB?(rds??? localhost?? ?????? ????), ardiary_nf: no foreign ??? ?? ??? ??????. ??? ?? ????? _nf??? ?
+    driver-class-name: org.postgresql.Driver
+    username: admin5
+    password: jongsul5
 
 server:
   port: 8019
@@ -21,3 +22,4 @@ server:
   
 jwt:
   secretKey: jureumuingNolHakKeyJwtSecret12411128094456375876587
+
