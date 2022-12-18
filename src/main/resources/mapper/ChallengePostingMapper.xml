@@ -26,6 +26,13 @@
          WHERE challenge_id = #{challengeId};
     </select>
 
+    <select id="selectByUserId"
+            resultType="ChallengePostingEntity">
+        SELECT challenge_posting_id, challenge_id, datetime, proving_image, proving_video, like_count, user_id
+        FROM challenge_posting
+        WHERE user_id = #{userId};
+    </select>
+
     <update id="update"
             parameterType="ChallengePostingEntity"
             useGeneratedKeys="true"

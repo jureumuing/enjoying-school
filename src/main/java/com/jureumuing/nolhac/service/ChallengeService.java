@@ -4,7 +4,6 @@ import com.jureumuing.nolhac.dto.ChallengeDetail;
 import com.jureumuing.nolhac.dto.ChallengePostingRes;
 import com.jureumuing.nolhac.dto.ChallengeRes;
 import com.jureumuing.nolhac.entity.ChallengeEntity;
-import com.jureumuing.nolhac.entity.ChallengePostingEntity;
 import com.jureumuing.nolhac.entity.UserEntity;
 import com.jureumuing.nolhac.repository.ChallengePostingRepository;
 import com.jureumuing.nolhac.repository.ChallengeRepository;
