@@ -11,6 +11,7 @@ public class ChallengeEntity {
     private String when;
     private String what;
     private String how;
+    private String where;
     private int count;
     private int userId;
 }

@@ -27,7 +27,7 @@ public class CandidateService {
         List<CandidateResponseDto> candidateList= new ArrayList<>();
         for(CandidateEntity e: candidateEntities){
             CandidateResponseDto candidateResponseDto = CandidateResponseDto.builder()
-                    .candidateId(e.getChallengeId())
+                    .candidateId(e.getCandidateId())
                     .admitCount(e.getAdmitCount())
                     .how(e.getHow())
                     .title(e.getTitle())
@@ -58,7 +58,7 @@ public class CandidateService {
     public CandidateResponseDto findById(int id){
         CandidateEntity e =candidateRepository.selectById(id);
         CandidateResponseDto candidateResponseDto = CandidateResponseDto.builder()
-                    .candidateId(e.getChallengeId())
+                    .candidateId(e.getCandidateId())
                     .admitCount(e.getAdmitCount())
                     .how(e.getHow())
                     .title(e.getTitle())
