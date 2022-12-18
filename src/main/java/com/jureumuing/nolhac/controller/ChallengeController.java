@@ -1,5 +1,6 @@
 package com.jureumuing.nolhac.controller;
 
+import com.jureumuing.nolhac.dto.ChallengeDetail;
 import com.jureumuing.nolhac.dto.ErrorResponse;
 import com.jureumuing.nolhac.entity.CandidateEntity;
 import com.jureumuing.nolhac.entity.ChallengeEntity;
@@ -39,6 +40,7 @@ public class ChallengeController {
         }
     }
 
+    //챌린지 종류 상세조회(챌린지정보+참여리스트)
     @GetMapping("/api/challenges/{challengeId}")
     public ResponseEntity<?> findChallengeDetail(@RequestHeader(value = "Authorization") String headerToken, @PathVariable int challengeId) {
         String token = headerToken;
@@ -50,7 +52,8 @@ public class ChallengeController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse("토큰 인증 실패. 조회 권한이 없습니다."));
 
         try {
-            
+            ChallengeDetail challengeDetail = challengeService.findChallengeDetail(challengeId);
+            return ResponseEntity.status(HttpStatus.OK).body(challengeDetail);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("오류발생"));
